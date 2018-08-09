@@ -17,5 +17,4 @@ def test_all(wallet_csv, wallet):
 
 def test_concurrency(csv, thread, wallet):
   new_thread = lambda e: Speadsheet(e).test({ 'wallet': wallet })
-  print(new_thread, csv)
   thread.start(new_thread, csv)
