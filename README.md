@@ -15,23 +15,35 @@ pip install -r requirements.txt
 ## Structure
 
 ```bash
-├── lib
+.
+├── bin/
+│   ├── console*
+│   └── console.py
+├── lib/
+│   ├── helpers/
+│   │   ├── api_base.py
+│   │   ├── api_response.py
+│   │   ├── concurrent.py
+│   │   ├── debug_helper.py
+│   │   └── eth.py
 │   ├── __init__.py
-│   ├── helpers
-│   │   ├── api_base.py # 实现get/post等等基础方法的母类
-│   │   ├── api_response.py # get/post等等之后返回的响应，可以用body()查看响应内容
-│   │   └── debug_helper.py # debug输出小工具
 │   └── wallet.py # Wallet的API描述，继承APIBase
-├── requirements.txt # 安装依赖 pip install -r requirements.txt
-└── tests
-    ├── __init__.py
-    ├── config
-    │   ├── config.yml # 服务器配置文件
-    │   └── environment.py # 用来读取上面的config.yml
-    ├── conftest.py # 公共测试数据，比如wallet、user等等
-    ├── factory
-    │   └── users.yml # 测试用户，改成自己用的测试用户
-    └── test_wallet.py # wallet的测试用例
+├── tests/
+│   ├── config/
+│   │   ├── config.yml # 服务器配置文件
+│   │   ├── environment.py
+│   │   └── spreadsheet.py
+│   ├── factory/
+│   ├── spreadsheets/ # 描述API测试的csv文件
+│   │   ├── threads/ # 描述并发API测试的csv文件
+│   │   │   └── wallet.csv
+│   │   └── wallet.csv
+│   ├── __init__.py
+│   ├── conftest.py # 公共测试数据
+│   ├── test_concurrent.py
+│   └── test_wallet.py # Wallet的API测试用例
+├── README.md
+└── requirements.txt
 ```
 
 ## tests/test_wallet.py
