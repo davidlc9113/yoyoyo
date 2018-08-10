@@ -1,8 +1,4 @@
-import yaml
-import json
-import os
-import re
-import pprint
+import yaml, json, os, re, pprint, glob
 
 class Environment(object):
   """docstring for Environment"""
@@ -10,6 +6,7 @@ class Environment(object):
     super(Environment, self).__init__()
     self.dir_path = os.path.dirname(os.path.realpath(__file__))
     self.tests_path = os.path.dirname(self.dir_path)
+    self.root_path = os.path.dirname(self.tests_path)
     self.config_file = os.path.join(self.dir_path, 'config.yml')
     if not os.path.exists(self.config_file):
       print("Not found config file %s"%(self.config_file))
@@ -70,3 +67,7 @@ class Environment(object):
     else:
       new_data = file_data
     return self.overwrite_factory(file_name, new_data)
+
+  def glob(self, path):
+    _path = os.path.join(self.root_path, path)
+    return glob.glob(_path)

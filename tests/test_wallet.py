@@ -7,10 +7,8 @@ def wallet_csv(env):
   return Speadsheet('tests/spreadsheets/wallet.csv')
 
 @pytest.fixture(scope='module')
-def csv():
-  return [
-    'tests/spreadsheets/wallet.csv'
-  ]
+def csv(env):
+  return env.glob('tests/spreadsheets/threads/*.csv')
 
 def test_all(wallet_csv, wallet):
   wallet_csv.test({ 'wallet': wallet })

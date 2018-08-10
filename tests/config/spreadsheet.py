@@ -7,10 +7,13 @@ class Speadsheet(object):
   def __init__(self, file_name):
     super(Speadsheet, self).__init__()
     self.file_name = file_name
-    self.dir_path = os.path.dirname(os.path.realpath(__file__))
-    self.tests_path = os.path.dirname(self.dir_path)
-    self.root_path = os.path.dirname(self.tests_path)
-    self.file = os.path.join(self.root_path, file_name)
+    if os.path.exists(self.file_name):
+      self.file = self.file_name
+    else:
+      dir_path = os.path.dirname(os.path.realpath(__file__))
+      tests_path = os.path.dirname(dir_path)
+      root_path = os.path.dirname(tests_path)
+      self.file = os.path.join(root_path, file_name)
     self.rows = self.__rows(self.file)
 
   def __rows(self, file):

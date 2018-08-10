@@ -5,6 +5,6 @@ def sleep(arg):
   time.sleep(3)
   print('done')
 
-def test_sleep(thread):
-  print()
-  thread.start(sleep, [1,2,3,4,5])
+# def test_sleep(thread):
+#   print()
+#   thread.start(sleep, [1,2,3,4,5])
