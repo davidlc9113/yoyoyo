@@ -47,7 +47,7 @@ def csv(env):
   return env.glob('tests/spreadsheets/threads/*.csv')
 ```
 
-### 根据csv文件执行csvAPI测试
+### 根据csv文件执行API测试
 ```python
 def test_all(wallet_csv, wallet):
   wallet_csv.test({ 'wallet': wallet })
