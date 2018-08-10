@@ -36,7 +36,8 @@ pip install -r requirements.txt
 
 ## tests/test_wallet.py
 
-```
+### fixture测试数据
+```python
 @pytest.fixture(scope='module')
 def wallet_csv(env):
   return Speadsheet('tests/spreadsheets/wallet.csv')
@@ -44,15 +45,19 @@ def wallet_csv(env):
 @pytest.fixture(scope='module')
 def csv(env):
   return env.glob('tests/spreadsheets/threads/*.csv')
+```
 
-# 根据csv文件执行csvAPI测试
-# wallet_csv定义在上面的fixture里
-# wallet是定义在tests/conftest.py里公共测试数据，这个变量是替换wallet_csv里Instance列里的'wallet'
+### 根据csv文件执行csvAPI测试
+```python
 def test_all(wallet_csv, wallet):
   wallet_csv.test({ 'wallet': wallet })
+```
+- wallet_csv定义在上面的fixture测试数据里
+- wallet是定义在tests/conftest.py里公共测试数据，这个变量是替换wallet_csv里Instance列里的'wallet'
 
-# 根据多个csv文件并发执行API测试
-# csv定义在上面的fixture里，返回tests/spreadsheets/threads下面的所有csv文件
+### 根据多个csv文件并发执行API测试
+```python
 def test_concurrency(csv, thread, wallet):
   ...
 ```
+- csv定义在上面的fixture测试数据里，返回tests/spreadsheets/threads下面的所有csv文件
