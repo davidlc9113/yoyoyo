@@ -1,5 +1,19 @@
 # README
 
+## Run test
+
+```bash
+pytest -s
+```
+
+## Install
+
+```bash
+pip install -r requirements.txt
+```
+
+## Structure
+
 ```bash
 ├── lib
 │   ├── __init__.py
@@ -18,4 +32,27 @@
     ├── factory
     │   └── users.yml # 测试用户，改成自己用的测试用户
     └── test_wallet.py # wallet的测试用例
+```
+
+## tests/test_wallet.py
+
+```
+@pytest.fixture(scope='module')
+def wallet_csv(env):
+  return Speadsheet('tests/spreadsheets/wallet.csv')
+
+@pytest.fixture(scope='module')
+def csv(env):
+  return env.glob('tests/spreadsheets/threads/*.csv')
+
+# 根据csv文件执行csvAPI测试
+# wallet_csv定义在上面的fixture里
+# wallet是定义在tests/conftest.py里公共测试数据，这个变量是替换wallet_csv里Instance列里的'wallet'
+def test_all(wallet_csv, wallet):
+  wallet_csv.test({ 'wallet': wallet })
+
+# 根据多个csv文件并发执行API测试
+# csv定义在上面的fixture里，返回tests/spreadsheets/threads下面的所有csv文件
+def test_concurrency(csv, thread, wallet):
+  ...
 ```
